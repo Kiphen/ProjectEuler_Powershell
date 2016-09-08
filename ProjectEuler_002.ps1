@@ -1,4 +1,19 @@
-﻿#Project Euler Problem 2
+﻿<#
+.SYNOPSIS
+    Project Euler Problem 2 - Even Fibonacci numbers
+.DESCRIPTION
+    By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.
+    
+        
+.NOTES
+    File Name      : ProjectEuler_002.ps1
+    Author         : Louis Kiphen (Louis.Kiphen@Outlook.com)
+
+.LINK
+    https://github.com/Kiphen/ProjectEuler_Powershell
+.EXAMPLE
+
+#>
 
 $UpperLimit = 4000000
 $Fib1=1

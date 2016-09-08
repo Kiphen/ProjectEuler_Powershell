@@ -1,4 +1,19 @@
-﻿#Project Euler Problem 1
+﻿<#
+.SYNOPSIS
+    Project Euler Problem 1 - Multiples of 3 and 5
+.DESCRIPTION
+    Find the sum of all the multiples of 3 or 5 below 1000.
+    
+        
+.NOTES
+    File Name      : ProjectEuler_001.ps1
+    Author         : Louis Kiphen (Louis.Kiphen@Outlook.com)
+
+.LINK
+    https://github.com/Kiphen/ProjectEuler_Powershell
+.EXAMPLE
+
+#>
 Param(
   [int]$Multiple_1 = 3,
   [int]$Multiple_2 = 5,
