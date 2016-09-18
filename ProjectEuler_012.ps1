@@ -4,7 +4,7 @@
 .DESCRIPTION
     What is the value of the first triangle number to have over five hundred divisors?       
 .NOTES
-    File Name      : ProjectEuler_011.ps1
+    File Name      : ProjectEuler_012.ps1
     Author         : Louis Kiphen (Louis.Kiphen@Outlook.com)
 
 .LINK
