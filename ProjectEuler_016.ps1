@@ -12,20 +12,17 @@
 .EXAMPLE
 
 #>
-Param([Int]$Power = 1000)
-$Factor = 2
-$Multiplicand = @(2)
+Param([Int]$Power = 1000, [Int]$Factor = 2)
 
+$Multiplicand = @($Factor)
 for($n=2;$n -le $Power;$n++)
     {
     $Product = @()
     $Carry = @(0)
     for($i=0;$i -lt $Multiplicand.Length;$i++)
-        {
-        
+        {        
         $DigitProduct = $Factor* $Multiplicand[$i]
-        if($DigitProduct -gt 9){$Carry += 1;$DigitProduct -= 10}
-        else{$Carry += 0}
+        if($DigitProduct -gt 9){$Carry += 1;$DigitProduct -= 10}else{$Carry += 0}
         $Product += $DigitProduct + $Carry[$i]
         if(($i -eq ($Multiplicand.Length -1)) -and $Carry[-1] -eq 1){$Multiplicand += 0}    
         }
@@ -33,6 +30,5 @@ for($n=2;$n -le $Power;$n++)
     Remove-Variable -Name Product
     Remove-Variable -Name Carry
     }
-
 $Answer = ($Multiplicand | Measure-Object -Sum).Sum
 Write-Output $Answer
