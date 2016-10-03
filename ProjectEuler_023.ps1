@@ -20,45 +20,43 @@ As 12 is the smallest abundant number, 1 + 2 + 3 + 4 + 6 = 16, the smallest numb
 #>
 
 $AbundantNumbers = @()
-$SumofAbundants = @()
-$SumofAbundants += (1..28123)
 $Answer = 0
-function Abundants
-    {
-    Param($PossibleAbundant)
-    $Divisors = GetDivisors($PossibleAbundant)
-    if(($Divisors | Measure-Object -Sum).Sum -gt $PossibleAbundant){Write-Output $true}
-    else{Write-Output $false}
-    }
 
-function GetDivisors
+function GetDivisorSum
     {
-    Param($Multiple)
-    #TODO
-    $ResultantDivisors = @(1)
-    $MaxDivisor= [Math]::Sqrt($Multiple)
-    if(($MaxDivisor % 1) -eq 0){$ResultantDivisors += $MaxDivisor}
+    Param([Int]$Divisor)
+    $DivisorSum = 0
+    $DivisorSum += 1
+    $MaxDivisor= [Math]::Sqrt($Divisor)
+    if(($MaxDivisor % 1) -eq 0){$DivisorSum += $MaxDivisor}
     for($n=2;$n -lt $MaxDivisor;$n++)
         {
-        if(($Multiple % $n) -eq 0)
+        if(($Divisor % $n) -eq 0)
             {
-            $ResultantDivisors += $n
-            $ResultantDivisors += $Multiple / $n
+            $DivisorSum += $n
+            $DivisorSum += $Divisor / $n
             }
         }
-    Write-Output $ResultantDivisors
+    Write-Output $DivisorSum
     }
-
+    Write-Host "$(Get-Date)"
 for($n=2;$n -le 28123;$n++)
     {
-    if(Abundants($n)){$AbundantNumbers += $n;Write-Host "$n is abundant"}
-    $Test = 0
-    for($m = 0;($Test -lt 28123) -and ($m -lt $AbundantNumbers.Length);$m++)
-        {
-        $Test = $AbundantNumbers[-1] + $AbundantNumbers[$m]
-        $SumofAbundants[$Test-1] = 0
-        }
+    $DivisorSum = GetDivisorSum($n)
+    if($DivisorSum -gt $n){$AbundantNumbers += $n}
     }
-$Answer = ($SumofAbundants | Measure-Object -Sum).Sum
+    Write-Host "$(Get-Date)"
+for($m=1;$m -le 28123;$m++)
+    {
+    $Found = $false
+    $Max = $m/2
+    for($x=0;($Found -eq $false) -and ($AbundantNumbers[$x] -le $Max);$x++)
+        {
+        if($AbundantNumbers.Contains($m - $AbundantNumbers[$x])){$Found = $true}
+        }
+    if(-not $Found){$Answer += $m}
+    }
 
 Write-Output $Answer
+Write-Host "$(Get-Date)"
+#Answer = 4179871
